@@ -1,0 +1,557 @@
+msis@master:~$ sudo mkdir bankapp
+[sudo] password for msis: 
+msis@master:~$ cd bankapp/
+msis@master:~/bankapp$ ls
+msis@master:~/bankapp$ ls -a
+.  ..
+msis@master:~/bankapp$ sudo git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+Initialized empty Git repository in /home/msis/bankapp/.git/
+msis@master:~/bankapp$ ls -a
+.  ..  .git
+msis@master:~/bankapp$ sudo git remote add origin "https://github.com/CtrlCreate/bankapp.git"
+msis@master:~/bankapp$ ls
+msis@master:~/bankapp$ sudo git pull origin main
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 860 bytes | 860.00 KiB/s, done.
+From https://github.com/CtrlCreate/bankapp
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+msis@master:~/bankapp$ ls
+README.md
+msis@master:~/bankapp$ sudo git remote -v
+origin	https://github.com/CtrlCreate/bankapp.git (fetch)
+origin	https://github.com/CtrlCreate/bankapp.git (push)
+msis@master:~/bankapp$ sudo git branch 
+* master
+msis@master:~/bankapp$ git branch -a
+fatal: detected dubious ownership in repository at '/home/msis/bankapp'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/msis/bankapp
+msis@master:~/bankapp$ sudo git branch -a
+* master
+  remotes/origin/main
+msis@master:~/bankapp$ sudo git checkout main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+Switched to a new branch 'main'
+msis@master:~/bankapp$ sudo git branch -a
+* main
+  master
+  remotes/origin/main
+msis@master:~/bankapp$ ls
+README.md
+msis@master:~/bankapp$ sudo git log
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (HEAD -> main, origin/main, master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp$ sudo git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+msis@master:~/bankapp$ sudo touch home.php
+msis@master:~/bankapp$ ls
+home.php  README.md
+msis@master:~/bankapp$ sudo git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	home.php
+
+nothing added to commit but untracked files present (use "git add" to track)
+msis@master:~/bankapp$ sudo cat > home.php
+bash: home.php: Permission denied
+msis@master:~/bankapp$ sudo ls -l
+total 4
+-rw-r--r-- 1 root root 0 Aug  5 11:57 home.php
+-rw-r--r-- 1 root root 9 Aug  5 11:50 README.md
+msis@master:~/bankapp$ sudo chown -R msis:msis home.php
+msis@master:~/bankapp$ ls -l
+total 4
+-rw-r--r-- 1 msis msis 0 Aug  5 11:57 home.php
+-rw-r--r-- 1 root root 9 Aug  5 11:50 README.md
+msis@master:~/bankapp$ sudo cat > home.php
+welcome to bankapp
+^C
+msis@master:~/bankapp$ sudo cat home.php
+welcome to bankapp
+msis@master:~/bankapp$ sudo git add home.php
+msis@master:~/bankapp$ sudo git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   home.php
+
+msis@master:~/bankapp$ sudo cat > home.php
+hello msis banking
+^C
+msis@master:~/bankapp$ sudo git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   home.php
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   home.php
+
+msis@master:~/bankapp$ sudo git commit home.php-m "added home page"
+error: pathspec 'home.php-m' did not match any file(s) known to git
+error: pathspec 'added home page' did not match any file(s) known to git
+msis@master:~/bankapp$ sudo git commit -a -m "added home page"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'root@master.(none)')
+msis@master:~/bankapp$ sudo git config --git config --global user.email "rbmanoj07@gmail.com"
+error: unknown option `git'
+usage: git config [<options>]
+
+Config file location
+    --global              use global config file
+    --system              use system config file
+    --local               use repository config file
+    --worktree            use per-worktree config file
+    -f, --file <file>     use given config file
+    --blob <blob-id>      read config from given blob object
+
+Action
+    --get                 get value: name [value-pattern]
+    --get-all             get all values: key [value-pattern]
+    --get-regexp          get values for regexp: name-regex [value-pattern]
+    --get-urlmatch        get value specific for the URL: section[.var] URL
+    --replace-all         replace all matching variables: name value [value-pattern]
+    --add                 add a new variable: name value
+    --unset               remove a variable: name [value-pattern]
+    --unset-all           remove all matches: name [value-pattern]
+    --rename-section      rename section: old-name new-name
+    --remove-section      remove a section: name
+    -l, --list            list all
+    --fixed-value         use string equality when comparing values to 'value-pattern'
+    -e, --edit            open an editor
+    --get-color           find the color configured: slot [default]
+    --get-colorbool       find the color setting: slot [stdout-is-tty]
+
+Type
+    -t, --type <>         value is given this type
+    --bool                value is "true" or "false"
+    --int                 value is decimal number
+    --bool-or-int         value is --bool or --int
+    --bool-or-str         value is --bool or string
+    --path                value is a path (file or directory name)
+    --expiry-date         value is an expiry date
+
+Other
+    -z, --null            terminate values with NUL byte
+    --name-only           show variable names only
+    --includes            respect include directives on lookup
+    --show-origin         show origin of config (file, standard input, blob, command line)
+    --show-scope          show scope of config (worktree, local, global, system, command)
+    --default <value>     with --get, use default value when missing entry
+
+msis@master:~/bankapp$ sudo git config --global user.email "rbmanoj07@gmail.com"
+msis@master:~/bankapp$ sudo git commit -a -m "added home page"
+[main 9c46a2e] added home page
+ 1 file changed, 1 insertion(+)
+ create mode 100644 home.php
+msis@master:~/bankapp$ sudo git log
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4 (HEAD -> main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (origin/main, master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp$ sudo git cat-file -p 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4
+tree 59336d94856125822f09fcf3766976aa919c1ee6
+parent 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde
+author root <rbmanoj07@gmail.com> 1722840105 +0530
+committer root <rbmanoj07@gmail.com> 1722840105 +0530
+
+added home page
+msis@master:~/bankapp$ sudo git cat-file -p 59336d94856125822f09fcf3766976aa919c1ee6
+100644 blob c7c1b228f1b597f3187cd14066fa0897acd533d1	README.md
+100644 blob f59326abc5f971cff7415623a3208b8cbcd2ebb9	home.php
+msis@master:~/bankapp$ ls
+home.php  README.md
+msis@master:~/bankapp$ sudo git cat-file -p f59326abc5f971cff7415623a3208b8cbcd2ebb9
+hello msis banking
+msis@master:~/bankapp$ cd.git 
+cd.git: command not found
+msis@master:~/bankapp$ cd .git
+msis@master:~/bankapp/.git$ ls
+branches  COMMIT_EDITMSG  config  description  FETCH_HEAD  HEAD  hooks  index  info  logs  objects  refs
+msis@master:~/bankapp/.git$ sudo git log
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4 (HEAD -> main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (origin/main, master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp/.git$ cd objects/
+msis@master:~/bankapp/.git/objects$ ls
+4b  59  5d  9c  c7  e7  f5  info  pack
+msis@master:~/bankapp/.git/objects$ cd 4b
+msis@master:~/bankapp/.git/objects/4b$ ls
+b5eff87b254e7c49c5892cb282c96f7e2e9cde
+msis@master:~/bankapp/.git/objects/4b$ sudo git log 
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4 (HEAD -> main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (origin/main, master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp/.git/objects/4b$ cd
+msis@master:~$ cd bankapp/
+msis@master:~/bankapp$ sudo git status
+[sudo] password for msis: 
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+msis@master:~/bankapp$ sudo git branch
+* main
+  master
+msis@master:~/bankapp$ ls
+home.php  README.md
+msis@master:~/bankapp$ sudo git push origin main
+Username for 'https://github.com': ctrlcreate
+Password for 'https://ctrlcreate@github.com': 
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 291 bytes | 291.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/CtrlCreate/bankapp.git
+   4bb5eff..9c46a2e  main -> main
+msis@master:~/bankapp$ sudo touch about.php contact.php
+msis@master:~/bankapp$ ls -l
+total 8
+-rw-r--r-- 1 root root  0 Aug  5 14:15 about.php
+-rw-r--r-- 1 root root  0 Aug  5 14:15 contact.php
+-rw-r--r-- 1 msis msis 19 Aug  5 12:06 home.php
+-rw-r--r-- 1 root root  9 Aug  5 11:50 README.md
+msis@master:~/bankapp$ sudo chown -R msis:msis about.php contact.php 
+msis@master:~/bankapp$ ls -l
+total 8
+-rw-r--r-- 1 msis msis  0 Aug  5 14:15 about.php
+-rw-r--r-- 1 msis msis  0 Aug  5 14:15 contact.php
+-rw-r--r-- 1 msis msis 19 Aug  5 12:06 home.php
+-rw-r--r-- 1 root root  9 Aug  5 11:50 README.md
+msis@master:~/bankapp$ sudo cat > about.php 
+bank name is msis
+^C
+msis@master:~/bankapp$ sudo cat > contact.php 
+owner rb
+ph no :1234567890
+^C
+msis@master:~/bankapp$ sudo git add -A
+msis@master:~/bankapp$ sudo git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   about.php
+	new file:   contact.php
+
+msis@master:~/bankapp$ sudo git commit -a -m "added about and contact page"
+[main e8247ce] added about and contact page
+ 2 files changed, 3 insertions(+)
+ create mode 100644 about.php
+ create mode 100644 contact.php
+msis@master:~/bankapp$ sudo git log
+commit e8247cec03230b374e0da7521ee781c93f34bf9c (HEAD -> main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 14:21:31 2024 +0530
+
+    added about and contact page
+
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4 (origin/main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp$ sudo git cat-file -p e8247cec03230b374e0da7521ee781c93f34bf9c
+tree fe51b5d9c3e707be02e5c38839822764f6eb44d7
+parent 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4
+author root <rbmanoj07@gmail.com> 1722847891 +0530
+committer root <rbmanoj07@gmail.com> 1722847891 +0530
+
+added about and contact page
+msis@master:~/bankapp$ sudo git cat-file -p fe51b5d9c3e707be02e5c38839822764f6eb44d7
+100644 blob c7c1b228f1b597f3187cd14066fa0897acd533d1	README.md
+100644 blob 1a39ce63e7abd0bcae263ebb265f434ead689e52	about.php
+100644 blob b6e4d51302a11a30eeb0324f39d316b4254d169b	contact.php
+100644 blob f59326abc5f971cff7415623a3208b8cbcd2ebb9	home.php
+msis@master:~/bankapp$ sudo git push origin main
+Username for 'https://github.com': ctrlcreate
+Password for 'https://ctrlcreate@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 397 bytes | 397.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/CtrlCreate/bankapp.git
+   9c46a2e..e8247ce  main -> main
+msis@master:~/bankapp$ sudo git branch
+* main
+  master
+msis@master:~/bankapp$ sudo git branch trans
+msis@master:~/bankapp$ sudo git branch
+* main
+  master
+  trans
+msis@master:~/bankapp$ sudo git checkout trans
+Switched to branch 'trans'
+msis@master:~/bankapp$ sudo git branch
+  main
+  master
+* trans
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md
+msis@master:~/bankapp$ sudo touch trans.php
+msis@master:~/bankapp$ sudo chown -R msis:msis trans.php 
+msis@master:~/bankapp$ sudo cat > trans.php 
+this page is for monitory transaction
+^C
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git status
+On branch trans
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	trans.php
+
+nothing added to commit but untracked files present (use "git add" to track)
+msis@master:~/bankapp$ sudo git add -A
+msis@master:~/bankapp$ sudo git status
+On branch trans
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   trans.php
+
+msis@master:~/bankapp$ sudo git commit -a -m "added trans page from trans branch"
+[trans 7c4eca0] added trans page from trans branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trans.php
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git branch
+  main
+  master
+* trans
+msis@master:~/bankapp$ sudo git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+msis@master:~/bankapp$ sudo git branch
+* main
+  master
+  trans
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md
+msis@master:~/bankapp$ sudo git checkout trans
+Switched to branch 'trans'
+msis@master:~/bankapp$ sudo git log
+commit 7c4eca00feebc7159352900c1260fb7441728cd9 (HEAD -> trans)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 14:41:49 2024 +0530
+
+    added trans page from trans branch
+
+commit e8247cec03230b374e0da7521ee781c93f34bf9c (origin/main, main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 14:21:31 2024 +0530
+
+    added about and contact page
+
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp$ sudo git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+msis@master:~/bankapp$ sudo git log
+commit e8247cec03230b374e0da7521ee781c93f34bf9c (HEAD -> main, origin/main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 14:21:31 2024 +0530
+
+    added about and contact page
+
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp$ sudo git merge trans
+Updating e8247ce..7c4eca0
+Fast-forward
+ trans.php | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 trans.php
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git log
+commit 7c4eca00feebc7159352900c1260fb7441728cd9 (HEAD -> main, trans)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 14:41:49 2024 +0530
+
+    added trans page from trans branch
+
+commit e8247cec03230b374e0da7521ee781c93f34bf9c (origin/main)
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 14:21:31 2024 +0530
+
+    added about and contact page
+
+commit 9c46a2e2d5dc97f71fef7c6387a563dcd8f875f4
+Author: root <rbmanoj07@gmail.com>
+Date:   Mon Aug 5 12:11:45 2024 +0530
+
+    added home page
+
+commit 4bb5eff87b254e7c49c5892cb282c96f7e2e9cde (master)
+Author: CtrlCreate <142497360+CtrlCreate@users.noreply.github.com>
+Date:   Mon Aug 5 11:39:24 2024 +0530
+
+    Initial commit
+msis@master:~/bankapp$ sudo git checkout trans
+Switched to branch 'trans'
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md  trans.php
+msis@master:~/bankapp$ sudo touch imps.php
+msis@master:~/bankapp$ sudo chown -R msis:msis imps.php
+msis@master:~/bankapp$ sudo cat > imps.php
+this page is for doing transaction
+^C
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  imps.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  imps.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git checkout trans
+Switched to branch 'trans'
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  imps.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git stash
+No local changes to save
+msis@master:~/bankapp$ sudo git add -A
+msis@master:~/bankapp$ sudo git stash
+Saved working directory and index state WIP on trans: 7c4eca0 added trans page from trans branch
+msis@master:~/bankapp$ sudo git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git checkout trans
+Switched to branch 'trans'
+msis@master:~/bankapp$ sudo git stash apply
+On branch trans
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   imps.php
+
+msis@master:~/bankapp$ sudo git commit -a -m "imps page is added for quick transaction"
+[trans 15cd2b9] imps page is added for quick transaction
+ 1 file changed, 1 insertion(+)
+ create mode 100644 imps.php
+msis@master:~/bankapp$ ls
+about.php  contact.php  home.php  imps.php  README.md  trans.php
+msis@master:~/bankapp$ sudo git push origin trans
+Username for 'https://github.com': ctrlcreate
+Password for 'https://ctrlcreate@github.com': 
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 569 bytes | 569.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'trans' on GitHub by visiting:
+remote:      https://github.com/CtrlCreate/bankapp/pull/new/trans
+remote: 
+To https://github.com/CtrlCreate/bankapp.git
+ * [new branch]      trans -> trans
+msis@master:~/bankapp$ cd
+msis@master:~$ sudo mkdir git_use
+msis@master:~$ cd git_use/
+msis@master:~/git_use$ ls
+msis@master:~/git_use$ ls -a
+.  ..
+msis@master:~/git_use$ msis@master:~$ sudo mkdir bankapp
+[sudo] password for msis: 
+msis@master:~$ cd bankapp/
+msis@master:~/bankapp$ ls
+msis@master:~/bankapp$ ls -a
